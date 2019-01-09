@@ -72,7 +72,6 @@
 					<label class="col-sm-3 control-label" for="select-admin">Add Member</label>
 					<div class="col-sm-4">
 						<select id="select-admin" class="form-control select member_choose" name="member[]" required>
-
 						</select>
 					</div>
 					<div class="col-sm-4">

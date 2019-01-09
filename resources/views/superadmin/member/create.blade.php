@@ -1,11 +1,10 @@
-@extends('layouts.master')
-@push('page-style')
+@extends('layouts.master') @push('page-style')
 <style>
-.md-form-group {
-	margin-bottom: 0px;
-}
-</style>>
-@endpush
+	.md-form-group {
+		margin-bottom: 0px;
+	}
+</style>> 
+@endpush 
 @section('page-content')
 <div class="title-bar">
 	<h1 class="title-bar-title">
@@ -39,7 +38,8 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="photo">Upload Photo</label>
 				<div class="col-sm-9">
-					<input type="file" id="photo" onchange="document.getElementById('image_preview').src =window.URL.createObjectURL(this.files[0])" name="profile_image" class="form-control">
+					<input type="file" id="photo" onchange="document.getElementById('image_preview').src =window.URL.createObjectURL(this.files[0])"
+					 name="profile_image" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -121,11 +121,12 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="pincode">Pincode <span class="text-danger">*</span></label>
 						<div class="col-sm-2">
-							<select name="pincode" id="pincode" class="form-control"  required="">
+							<select name="pincode" id="pincode" class="form-control" required="">
 								@foreach($region as $region)
 								@php
 									$array = explode(",",$region['pincode']);
-								@endphp
+								
+@endphp
 
 								@foreach($array as $val)
 									<option value="{{$val}}" data-ids="{{$val}}">{{$val}}</option>
@@ -137,9 +138,9 @@
 
 						<label class="col-sm-2 control-label" for="khanp">Khanp <span class="text-danger">*</span></label>
 						<div class="col-sm-2">
-								<input name="khanp" id="khanp" class="form-control input-sm" type="text" placeholder="First Name" required=""disabled>
+							<input name="khanp" id="khanp" class="form-control input-sm" type="text" placeholder="First Name" required="" disabled>
 						</div>
-						 <label class="col-sm-2 control-label" for="up_khanp">UpKhanp</label>
+						<label class="col-sm-2 control-label" for="up_khanp">UpKhanp</label>
 						<div class="col-sm-2">
 							<select class="form-control input-sm" name="up_khanp" id="up_khanp">
 
@@ -187,10 +188,8 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="contact">Mobile No:1 <span class="text-danger">*</span></label>
 						<div class="col-sm-2">
-							<input name="contact" id="contact" class="form-control input-sm" type="text" value="" required="">
-							@if($errors->has('contact'))
-							<span class="text-danger"><strong>{{ $errors->first('contact')}}</strong></span>
-							@endif
+							<input name="contact" id="contact" class="form-control input-sm" type="text" value="" required=""> @if($errors->has('contact'))
+							<span class="text-danger"><strong>{{ $errors->first('contact')}}</strong></span> @endif
 						</div>
 						<label class="col-sm-2 control-label" for="alt_contact">Mobile No:2 </label>
 						<div class="col-sm-2">
@@ -221,57 +220,112 @@
 		</div>
 		<div class="col-sm-12">
 			<div class="card" aria-expanded="true">
-			<div class="card card-collapsed" aria-expanded="true">
-				<div class="card-header bg-primary">
-					<div class="card-actions">
-						<button type="button" class="card-action card-toggler" title="Collapse" aria-expanded="true"></button>
+				<div class="card card-collapsed" aria-expanded="true">
+					<div class="card-header bg-primary">
+						<div class="card-actions">
+							<button type="button" class="card-action card-toggler" title="Collapse" aria-expanded="true"></button>
+						</div>
+						<strong>Address &amp; Qualification Details</strong>
 					</div>
-					<strong>Address &amp; Qualification Details</strong>
-				</div>
-				<div class="card-body">
+					<div class="card-body">
 
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="email">Email Id. </label>
-						<div class="col-sm-4">
-							<input name="email" id="email" class="form-control input-sm" type="email" value="">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="email">Email Id. </label>
+							<div class="col-sm-4">
+								<input name="email" id="email" class="form-control input-sm" type="email" value="">
+							</div>
+							<label class="col-sm-2 control-label" for="alt_email">Alternate Email Id. </label>
+							<div class="col-sm-4">
+								<input name="alt_email" id="alt_email" class="form-control input-sm" type="email" value="">
+							</div>
 						</div>
-						<label class="col-sm-2 control-label" for="alt_email">Alternate Email Id. </label>
-						<div class="col-sm-4">
-							<input name="alt_email" id="alt_email" class="form-control input-sm" type="email" value="">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="address">Address:1</label>
+							<div class="col-sm-2">
+								<textarea class="form-control input-sm" rows="1" name="address" id="address" spellcheck="false"></textarea>
+							</div>
+							<label class="col-sm-2 control-label" for="alt_address">Address:2</label>
+							<div class="col-sm-2">
+								<textarea class="form-control input-sm" rows="1" name="alt_address" id="alt_address" spellcheck="false"></textarea>
+							</div>
+							<label class="col-sm-2 control-label" for="alt_city">State</label>
+							<div class="col-sm-2">
+								<textarea class="form-control input-sm" rows="1" name="alt_city" id="alt_city" spellcheck="false"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="city">City</label>
+							<div class="col-sm-4">
+								<input name="city" id="city" class="form-control input-sm" type="text" value="">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="occupation">Occupation </label>
+							<div class="col-sm-2">
+								<input name="occupation" id="occupation" class="form-control input-sm" type="text" value="">
+							</div>
+							<label class="control-label col-sm-2" for="company_details">Company Details </label>
+							<div class="col-sm-2">
+								<textarea class="form-control input-sm" rows="1" name="company_details" id="company_details" spellcheck="false"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="qualification">Qualification </label>
+							<div class="col-sm-11">
+								<select name="qualification_category" id="qualification_category" class="form-control input-sm">
+								<option value="0">Select an option</option>
+								@foreach($qualification_category as $val)
+									<option value="{{$val['id']}}">{{$val['name']}}</option>
+								@endforeach
+							</select>
+								<select name="qualification" id="qualification" class="form-control input-sm">
+								
+							</select>
+
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-outline-primary add_more" title="Add More Qualification" tooltip>
+									<i class="icon icon-plus-circle"></i>
+								</button>
+							</div>
+						</div>
+						<div class="form-group" id="multiple_qualification"></div>
+						<div class="form-group" id="other_qualification-div" style="display: none;">
+							<label class="control-label col-sm-2" for="qualification"> About Qualification </label>
+							<div class="col-sm-10">
+								<textarea class="form-control input-sm" rows="1" name="other_qualification" spellcheck="false"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="native_address">Native Address</label>
+							<div class="col-sm-2">
+								<textarea class="form-control input-sm" rows="1" name="native_address" id="native_address" spellcheck="false"></textarea>
+							</div>
+							<label class="col-sm-2 control-label" for="dist">District</label>
+							<div class="col-sm-2">
+								<input name="dist" id="dist" class="form-control" type="text" value="">
+							</div>
+							<label class="col-sm-2 control-label" for="native_pincode">Pincode</label>
+							<div class="col-sm-2">
+								<input name="native_pincode" id="native_pincode" class="md-form-control" type="text" value="">
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="address">Address:1</label>
-						<div class="col-sm-2">
-							<textarea class="form-control input-sm" rows="1" name="address" id="address" spellcheck="false"></textarea>
-						</div>
-						<label class="col-sm-2 control-label" for="alt_address">Address:2</label>
-						<div class="col-sm-2">
-							<textarea class="form-control input-sm" rows="1" name="alt_address" id="alt_address" spellcheck="false"></textarea>
-						</div>
-						<label class="col-sm-2 control-label" for="alt_city">State</label>
-						<div class="col-sm-2">
-							<textarea class="form-control input-sm" rows="1" name="alt_city" id="alt_city" spellcheck="false"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="city">City</label>
-						<div class="col-sm-4">
-							<input name="city" id="city" class="form-control input-sm" type="text" value="">
-						</div>
-						
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="occupation">Occupation </label>
-						<div class="col-sm-2">
-							<input name="occupation" id="occupation" class="form-control input-sm" type="text" value="">
-						</div>
-						<label class="control-label col-sm-2" for="company_details">Company Details </label>
-						<div class="col-sm-2">
-							<textarea class="form-control input-sm" rows="1" name="company_details" id="company_details" spellcheck="false"></textarea>
-						</div>
-						<label class="control-label col-sm-2" for="qualification">Qualification </label>
-						<div class="col-sm-2">
+				</div>
+				<div class="col-sm-12">
+					<button class="btn btn-lg btn-outline-primary">
+					<i class="icon icon-paper-plane"></i> Submit Details
+				</button>
+				</div>
+			</div>
+	</form>
+	</div>
+@endsection
+ @push('page-script')
+	<script>
+		let more_qualification = `<label class="control-label col-sm-2" for="qualification">Qualification </label>
+							<div class="col-sm-11">
 							<select name="qualification_category" id="qualification_category" class="form-control input-sm">
 								<option value="0">Select an option</option>
 								@foreach($qualification_category as $val)
@@ -282,43 +336,17 @@
 								
 							</select>
 
-						</div>
-					</div>
-					<div class="form-group" id="other_qualification-div" style="display: none;">
-						<label class="control-label col-sm-2" for="qualification"> About Qualification </label>
-						<div class="col-sm-10">
-							<textarea class="form-control input-sm" rows="1" name="other_qualification" spellcheck="false"></textarea>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label" for="native_address">Native Address</label>
-						<div class="col-sm-2">
-							<textarea class="form-control input-sm" rows="1" name="native_address" id="native_address" spellcheck="false"></textarea>
-						</div>
-						<label class="col-sm-2 control-label" for="dist">District</label>
-						<div class="col-sm-2">
-							<input name="dist" id="dist" class="form-control" type="text" value="">
-						</div>
-						<label class="col-sm-2 control-label" for="native_pincode">Pincode</label>
-						<div class="col-sm-2">
-							<input name="native_pincode" id="native_pincode" class="md-form-control" type="text" value="">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<button class="btn btn-lg btn-outline-primary">
-					<i class="icon icon-paper-plane"></i> Submit Details
-				</button>
-			</div>
-		</div>
-	</form>
-</div>
+						</div>`;
 
-@endsection
-@push('page-script')
-<script>
 
+	$('.add_more').on('click',function(){
+
+
+
+			$('#multiple_qualification').append(more_qualification);
+
+
+	});
 	$('#dob').datepicker({
 		startDate: '-125y',
 		endDate: '0'
@@ -362,10 +390,11 @@
 			$("#other_qualification-div").hide('slow');
 		}
 	});
-</script>
 
-<script type="text/javascript">
-	$('#l_name').change(function(){
+	</script>
+
+	<script type="text/javascript">
+		$('#l_name').change(function(){
 		var l_name = $(this).find("option:selected").attr("data-id");
 		console.log(l_name);
     // alert(l_name);
@@ -429,6 +458,8 @@
 
 		return true;
 	}
-</script>
 
+	</script>
+
+	
 @endpush
