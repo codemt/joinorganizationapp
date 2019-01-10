@@ -331,7 +331,7 @@
 									</select>
 								</div>
 		
-								</div>
+						</div>
 						<div class="form-group" id="other_qualification-div" style="display: none;">
 							<label class="control-label col-sm-2" for="qualification"> About Qualification </label>
 							<div class="col-sm-10">
@@ -391,7 +391,7 @@
 		$("#y").on('change','select',function () { 
 			
 			$('#z').children("select.qualification").html("");
-			// alert('helo'); 
+		// alert('helo'); 
 			var selectedCategory = this.options[this.selectedIndex].text;
 			var ele = $(this);
 			console.log(ele);

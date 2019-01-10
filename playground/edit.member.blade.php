@@ -1,11 +1,11 @@
-@extends('layouts.master') @push('page-style')
+@extends('layouts.master')
+@push('page-style')
 <style>
-	.md-form-group {
-		margin-bottom: 0px;
-	}
-</style>
-
-@endpush 
+.md-form-group {
+	margin-bottom: 0px;
+}
+</style>>
+@endpush
 @section('page-content')
 <div class="title-bar">
 	<h1 class="title-bar-title">
@@ -22,9 +22,9 @@
 </div>
 @endif
 <div class="row">
-	<form class="form form-horizontal" method="post" action="{{ route('member.update',$member->id) }}" enctype="multipart/form-data"
-	 onsubmit="return check_no();">
-		{{ csrf_field() }} {{ method_field('PATCH') }}
+	<form class="form form-horizontal" method="post" action="{{ route('member.update',$member->id) }}" enctype="multipart/form-data" onsubmit="return check_no();">
+		{{ csrf_field() }}
+		{{ method_field('PATCH') }}
 		<input type="hidden" name="user_id" value="{{ $member->user_id }}">
 
 		<div class="col-sm-9">
@@ -46,8 +46,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="photo">Upload Photo</label>
 				<div class="col-sm-9">
-					<input type="file" id="photo" onchange="document.getElementById('image_preview').src =window.URL.createObjectURL(this.files[0])"
-					 name="profile_image" class="form-control">
+					<input type="file" id="photo" onchange="document.getElementById('image_preview').src =window.URL.createObjectURL(this.files[0])" name="profile_image" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -96,19 +95,16 @@
 							<input name="f_name" value="{{$member->f_name}}" class="form-control input-sm" type="text" placeholder="First Name" required="">
 						</div>
 						<div class="col-sm-2">
-							<input name="m_name" value="{{$member->m_name}}" class="form-control input-sm" type="text" placeholder="Father / Husband Name"
-							 required="">
+							<input name="m_name"  value="{{$member->m_name}}" class="form-control input-sm" type="text" placeholder="Father / Husband Name" required="">
 						</div>
 						<div class="col-sm-2">
-							<input name="mother_name" value="{{$member->mother_name}}" class="form-control input-sm" type="text" placeholder="Mother's Name"
-							 required="">
+							<input name="mother_name" value="{{$member->mother_name}}" class="form-control input-sm" type="text" placeholder="Mother's Name" required="">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="dob">Date of Birth <span class="text-danger">*</span></label>
 						<div class="col-sm-2">
-							<input name="dob" id="dob" class="form-control input-sm" id="dob" type="text" data-provide="datepicker" required="" value="{{date("
-							 d/m/Y ", strtotime($member->dob))}}">
+							<input name="dob" id="dob" class="form-control input-sm" id="dob" type="text" data-provide="datepicker" required="" value="{{date("d/m/Y", strtotime($member->dob))}}">
 						</div>
 						<label class="col-sm-2 control-label" for="">Gender</label>
 						<div class="col-sm-6">
@@ -158,13 +154,12 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="pincode">Pincode</label>
 						<div class="col-sm-2">
-							<select name="pincode" id="pincode" class="form-control">
+						<select name="pincode" id="pincode" class="form-control">
 
 							@foreach($region as $region)
 							@php
 								$array = explode(",",$region['pincode']);
-							
-@endphp
+							@endphp
 
 							@foreach($array as $val)
 								@if ($member->pincode == $val)
@@ -183,7 +178,7 @@
 							<input name="khanp" id="khanp" class="form-control input-sm" type="text" placeholder="First Name" required="" disabled>
 						</div>
 
-
+						
 						<label class="col-sm-2 control-label" for="up_khanp">UpKhanp</label>
 						<div class="col-sm-2">
 							<select class="form-control input-sm" name="up_khanp" id="up_khanp">
@@ -233,8 +228,10 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" for="contact">Mobile No:1 <span class="text-danger">*</span></label>
 						<div class="col-sm-2">
-							<input name="contact" id="contact" class="form-control input-sm" type="text" required="" value="{{$member->contact}}">							@if($errors->has('contact'))
-							<span class="text-danger"><strong>{{ $errors->first('contact')}}</strong></span> @endif
+							<input name="contact" id="contact" class="form-control input-sm" type="text" required="" value="{{$member->contact}}">
+							@if($errors->has('contact'))
+							<span class="text-danger"><strong>{{ $errors->first('contact')}}</strong></span>
+							@endif
 						</div>
 						<label class="col-sm-2 control-label" for="alt_contact">Mobile No:2 </label>
 						<div class="col-sm-2">
@@ -314,68 +311,29 @@
 						<div class="col-sm-2">
 							<textarea class="form-control input-sm" rows="1" name="company_details" id="company_details" spellcheck="false">{{$member->company_details}}</textarea>
 						</div>
-						
-					</div>
-					<div class="form-group">
 						<label class="control-label col-sm-2" for="qualification">Qualification </label>
-						<div class="col-sm-11">
+						<div class="col-sm-2">
 							<select name="qualification_category" id="qualification_category" class="form-control input-sm">
-								<option value="0">Select an option</option>
-								@foreach($qualification_category as $val)
-									<option value="{{$val['id']}}">{{$val['name']}}</option>
+								
+							</select>		
+							<?php $id = ""; ?>
+							<select name="qualification" id="qualification" class="form-control input-sm">
+								<option value=" ">Select Qualification</option>
+								<?php $temp1 = $qualification; ?>
+								@foreach($qualification as $data3)
+								@if($data3['name'] == $member->qualification)
+								<?php $id = $data3['category']; ?>
+								<option value="{{$data3['name']}}" selected="selected">{{$data3['name']}}</option>
+								@endif
+								@endforeach
+
+								@foreach($temp1 as $data3)
+								@if($data3['name'] != $member->qualification && $data3['category'] == $id)
+								<option value="{{$data3['name']}}">{{$data3['name']}}</option>
+								@endif
 								@endforeach
 							</select>
-							<select name="qualification" id="qualification" class="form-control input-sm">
-								
-							</select>
-
 						</div>
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-outline-primary add_more" title="Add More Qualification" tooltip>
-									<i class="icon icon-plus-circle"></i>
-								</button>
-						</div>
-						<div class="col-sm-1">
-							<button type="button" class="btn btn-outline-danger remove" title="Add More Qualification" tooltip>
-									<i class="icon icon-minus-circle"></i>
-								</button>
-						</div>
-					</div>
-					<div id="x" class="form-group" style="display: none">
-						<div id="y" class="col-sm-11" style="margin-top:-30px">
-							<label class="control-label col-sm-2" for="qualification">Qualification </label>
-							<select name="qualification_category2" id="qualification_category" class="form-control input-sm">
-									<option value="0">Select an option</option>
-									@foreach($qualification_category as $val)
-										<option value="{{$val['id']}}">{{$val['name']}}</option>
-									@endforeach
-								</select>
-						</div>
-
-						<div id="z" class="col-sm-11">
-							<select name="qualification2" id="qualification" class="form-control input-sm qualification">
-	
-								</select>
-						</div>
-
-					</div>
-					<div id="a"class="form-group" style="display: none">
-							<div id="b" class="col-sm-11">
-									<label class="control-label col-sm-2" for="qualification">Qualification </label>
-									<select name="qualification_category3" id="qualification_category" class="form-control input-sm">
-									<option value="0">Select an option</option>
-									@foreach($qualification_category as $val)
-										<option value="{{$val['id']}}">{{$val['name']}}</option>
-									@endforeach
-								</select>
-							</div>
-							
-							<div id="c" class="col-sm-11"> 
-								<select name="qualification3" id="qualification" class="form-control input-sm qualification">
-	
-								</select>
-							</div>
-	
 					</div>
 					<div class="form-group" id="other_qualification-div" style="display: none;">
 						<label class="control-label col-sm-2" for="qualification"> About Qualification </label>
@@ -407,15 +365,10 @@
 		</div>
 	</form>
 </div>
+
 @endsection
- @push('page-script')
+@push('page-script')
 <script>
-	
-
-</script>
-<script>
-
-
 
 	$('#dob').datepicker({
 		startDate: '-125y',
@@ -424,7 +377,38 @@
 
 	});
 
-  
+    <?php $quali = $qualification; ?>
+	@foreach($qualification_category as $val)
+	   var category = {{$id}};
+	   var temp = {{$val['id']}};
+	   if(category == temp)
+	   {
+			$("#qualification_category").append('<option value="{{$val['id']}}" selected="">{{trim($val['name'])}}</option>');
+	   }
+	   else
+	   {
+   			$("#qualification_category").append('<option value="{{$val['id']}}">{{trim($val['name'])}}</option>');
+	   }
+	@endforeach
+
+	$("#qualification_category").change(function() {
+		$("#qualification").html("");
+
+		var ele = $(this);
+
+		if ( $(this).val() == "0" ) {
+
+		}
+		else {
+			@foreach($qualification as $val)
+				var id = {{$val['category']}};
+				if(id == ele.val())
+				{
+						$("#qualification").append('<option value="{{$val['name']}}">{{$val['name']}}</option>');
+				}
+			@endforeach
+		}
+	});
 
 	$("#marital_status").change(function() {
 		if ( $(this).val() == "Married" ) {
@@ -435,7 +419,6 @@
 		}
 	});
 
-	
 
 </script>
 
@@ -490,101 +473,6 @@ if(l_name){
 	var members = [];
 	$(document).ready(function() {
 
-
-		$(".add_more").on('click',function(){
-
-			
-		
-				$("#x").css('display','block');
-				$("#a").css('display','block');	
-
-
-	})
-
-
-	$(".remove").on('click',function(){
-
-
-
-					$("#x").css('display','none');
-					$("#a").css('display','none');
-
-	});
-
-		$("#y").on('change','select',function () { 
-			
-			$('#z').children("select.qualification").html("");
-			// alert('helo'); 
-			var selectedCategory = this.options[this.selectedIndex].text;
-			var ele = $(this);
-			console.log(ele);
-
-			console.log($(this).val());
-		if ( $(this).val() == "0" ) {
-
-		}
-		else {
-			@foreach($qualification as $val)
-				var id = {{$val['category']}};
-				$('#z').children("select.qualification").append;
-				if(id == ele.val())
-				{
-					$('#z').children("select.qualification").append('<option value="{{$val['name']}}">{{$val['name']}}</option></select>');
-						
-				}
-			@endforeach
-		}			
-		
-	});
-
-			$("#b").on('change','select',function () { 
-			
-			$('#c').children("select.qualification").html("");
-			// alert('helo'); 
-			var selectedCategory = this.options[this.selectedIndex].text;
-			var ele = $(this);
-			console.log(ele);
-
-			console.log($(this).val());
-		if ( $(this).val() == "0" ) {
-
-		}
-		else {
-			@foreach($qualification as $val)
-				var id = {{$val['category']}};
-				$('#c').children("select.qualification").append;
-				if(id == ele.val())
-				{
-					$('#c').children("select.qualification").append('<option value="{{$val['name']}}">{{$val['name']}}</option></select>');
-						
-				}
-			@endforeach
-		}			
-		
-	});
-
-		$("#qualification_category").change(function() {
-		$("#qualification").html("");
-
-		var ele = $(this);
-
-		if ( $(this).val() == "0" ) {
-
-		}
-		else {
-			@foreach($qualification as $val)
-				var id = {{$val['category']}};
-				if(id == ele.val())
-				{
-						$("#qualification").append('<option value="{{$val['name']}}">{{$val['name']}}</option>');
-				}
-			@endforeach
-		}
-	});
-
-
-
-
 		@foreach($members6 as $members2)
 		@if($members2->id != $member->id)
 		members.push('{{$members2->contact}}');
@@ -634,8 +522,6 @@ if(l_name){
 
 		return true;
 	}
-
 </script>
-
 
 @endpush

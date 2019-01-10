@@ -119,7 +119,7 @@ class MemberController extends Controller
 
    
 
-    $qualifications = json_encode($qualifications,true);  
+    
       $validatedData = $request->validate([
         'mobile_no' => 'unique:members',
 
@@ -128,6 +128,7 @@ class MemberController extends Controller
      // add qualifications
      $qualifications = [];
      array_push($qualifications,$request->qualification,$request->qualification2,$request->qualification3);
+     $qualifications = json_encode($qualifications,true);  
 
     if(!$this->pincodeCheck($request->pincode)){
         Session::flash('error','Pincode not found in our database');
@@ -291,6 +292,8 @@ class MemberController extends Controller
         $qualification = Qualification::all();
         $qualification_category = Qualification_Category::all();
 
+
+        //return $members2;
         return view('superadmin.member.edit',compact('member','members2' ,'members6','surname','region','qualification','qualification_category'));
     }
 
@@ -308,6 +311,13 @@ class MemberController extends Controller
           'mobile_no' => 'unique:members',
 
         ]);
+
+    // add qualifications
+     $qualifications = [];
+     array_push($qualifications,$request->qualification,$request->qualification2,$request->qualification3);
+     $qualifications = json_encode($qualifications,true);  
+
+    // return $qualifications;
 
         if(!$this->pincodeCheck($request->pincode)){
             Session::flash('error','Pincode not found in our Regions');
@@ -388,7 +398,7 @@ class MemberController extends Controller
         $member->up_khanp       = $request->up_khanp;
         $member->occupation     = $request->occupation;
         $member->company_details= $request->company_details;
-        $member->qualification  = $request->qualification;
+        $member->qualification  = $qualifications;
         $member->native_address = $request->native_address;
         $member->dist           = $request->dist;
         $member->native_pincode = $request->native_pincode;
