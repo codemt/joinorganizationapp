@@ -116,10 +116,18 @@ class MemberController extends Controller
     public function store(PhoneRequest $request)
     {
 
+
+   
+
+    $qualifications = json_encode($qualifications,true);  
       $validatedData = $request->validate([
         'mobile_no' => 'unique:members',
 
     ]);
+
+     // add qualifications
+     $qualifications = [];
+     array_push($qualifications,$request->qualification,$request->qualification2,$request->qualification3);
 
     if(!$this->pincodeCheck($request->pincode)){
         Session::flash('error','Pincode not found in our database');
@@ -226,7 +234,7 @@ class MemberController extends Controller
         'up_khanp'          => $request->up_khanp,
         'occupation'        => $request->occupation,
         'company_details'   => $request->company_details,
-        'qualification'     => $request->qualification,
+        'qualification'     => $qualifications,
         'native_address'    => $request->native_address,
         'dist'              => $request->dist,
         'native_pincode'    => $request->native_pincode,
@@ -238,6 +246,7 @@ class MemberController extends Controller
     $regions = Region::all();
 
     foreach($regions as $region){
+
         if(isset($region->pincode)){
             $pincodes = explode(',',$region->pincode);
             if(in_array($request->pincode,$pincodes)){
@@ -248,6 +257,7 @@ class MemberController extends Controller
                 ]);
                 break;
             }
+
     }
 }
 

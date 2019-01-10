@@ -290,23 +290,48 @@
 									<i class="icon icon-plus-circle"></i>
 								</button>
 							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-outline-danger remove" title="Add More Qualification" tooltip>
+									<i class="icon icon-minus-circle"></i>
+								</button>
+							</div>
 						</div>
-						<div class="form-group" id="multiple_qualification"></div>
-						<div id="x"></div>
-						<div id="y">
-								<select name="qualification_category" id="qualification_category" class="form-control input-sm">
+						<div id="x"class="form-group" style="display: none">
+						<div id="y" class="col-sm-11" style="margin-top:-30px">
+								<label class="control-label col-sm-2" for="qualification">Qualification </label>
+								<select name="qualification_category2" id="qualification_category" class="form-control input-sm">
 								<option value="0">Select an option</option>
 								@foreach($qualification_category as $val)
 									<option value="{{$val['id']}}">{{$val['name']}}</option>
 								@endforeach
 							</select>
 						</div>
-						<div id="z"> 
-							<select name="qualification" id="qualification" class="form-control input-sm qualification">
+						
+						<div id="z" class="col-sm-11"> 
+							<select name="qualification2" id="qualification" class="form-control input-sm qualification">
 
 							</select>
+						</div>
 
 						</div>
+						<div id="a"class="form-group" style="display: none">
+								<div id="b" class="col-sm-11">
+										<label class="control-label col-sm-2" for="qualification">Qualification </label>
+										<select name="qualification_category3" id="qualification_category" class="form-control input-sm">
+										<option value="0">Select an option</option>
+										@foreach($qualification_category as $val)
+											<option value="{{$val['id']}}">{{$val['name']}}</option>
+										@endforeach
+									</select>
+								</div>
+								
+								<div id="c" class="col-sm-11"> 
+									<select name="qualification3" id="qualification" class="form-control input-sm qualification">
+		
+									</select>
+								</div>
+		
+								</div>
 						<div class="form-group" id="other_qualification-div" style="display: none;">
 							<label class="control-label col-sm-2" for="qualification"> About Qualification </label>
 							<div class="col-sm-10">
@@ -342,6 +367,27 @@
 	<script>
 
 
+		$(".add_more").on('click',function(){
+
+			
+		
+			 $("#x").css('display','block');
+			$("#a").css('display','block');	
+			
+
+		})
+
+
+		$(".remove").on('click',function(){
+
+
+
+				$("#x").css('display','none');
+				$("#a").css('display','none');
+
+		})
+
+
 		$("#y").on('change','select',function () { 
 			
 			$('#z').children("select.qualification").html("");
@@ -368,46 +414,38 @@
 		
 	});
 
+		$("#b").on('change','select',function () { 
+			
+			$('#c').children("select.qualification").html("");
+			// alert('helo'); 
+			var selectedCategory = this.options[this.selectedIndex].text;
+			var ele = $(this);
+			console.log(ele);
+
+			console.log($(this).val());
+		if ( $(this).val() == "0" ) {
+
+		}
+		else {
+			@foreach($qualification as $val)
+				var id = {{$val['category']}};
+				$('#c').children("select.qualification").append;
+				if(id == ele.val())
+				{
+					$('#c').children("select.qualification").append('<option value="{{$val['name']}}">{{$val['name']}}</option></select>');
+						
+				}
+			@endforeach
+		}			
+		
+	});
+
 
 		var i=0;
-	$('.add_more').on('click',function(){
-
-		let more_qualification = `<label class="control-label col-sm-2" for="qualification">Qualification </label>
-							<div class="col-sm-11">
-							<select name="qualification_category[]" id="qualification_category_x" class="form-control input-sm">
-								<option value="0">Select an option</option>
-								@foreach($qualification_category as $val)
-									<option value="{{$val['id']}}">{{$val['name']}}</option>
-								@endforeach
-							</select>		
-							<select name="qualification[`+i+`]" id="qualification[`+i+`]" class="form-control input-sm">
-								
-							</select>
-							</div>
-							<div class="col-sm-1">
-								<button type="button" class="btn btn-outline-danger remove_data" title="Remove Qualification" tooltip>
-									<i class="icon icon-minus-circle"></i>
-								</button>
-							</div>
-						`;
-
-
-
-
-			$('#multiple_qualification').append(more_qualification);
-
-			i++;
-
-		$('[tooltip]').tooltip();
-	});
-
+	
 	
 
-	//remove 
-	$(document).on('click','.remove_data',function() {
-		$('#multi_qual').child.remove();
-	});
-
+	
 
 	$('#dob').datepicker({
 		startDate: '-125y',
@@ -425,48 +463,6 @@
 		}
 	});
 
-
-// "#myID\\.entry\\[1\\]" 
-$("#qualification\\_category\\[0\\]").on('change',function(){ 
-	
-	
-	
-			console.log('hi');
-	
-	
-	
-	});
-
-	$("#qualification_category_x").on('change','select',function () { alert('helo'); });
-
-	$("#qualification_category_x").change(function(){
-
-
-			console.log('called');	
-
-	});
-$("#qualication_category[0]").change(function(){
-
-	console.log('this is called');
-		//$("#qualification_0").html("");
-
-		// var ele = $(this);
-
-		// if ( $(this).val() == "0" ) {
-
-		// }
-		// else {
-		// 	@foreach($qualification as $val)
-		// 		var id = {{$val['category']}};
-		// 		if(id == ele.val())
-		// 		{
-		// 				$("#qualification_0").append('<option value="{{$val['name']}}">{{$val['name']}}</option>');
-		// 		}
-		// 	@endforeach
-		// }
-
-
-})
 	$("#qualification_category").change(function() {
 		$("#qualification").html("");
 
